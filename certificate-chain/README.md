@@ -8,16 +8,21 @@ We generate 4096-bit RSA private keys for root, intermediate, and end with AES-2
 
 *Creating root certificate*
 > sudo openssl genrsa -aes256 -out root_private.key 4096
+
 > sudo openssl req -new -key root_private.key -out root.csr -subj "/C=VN/ST=JJ/L=GLB/O=USYD/CN=540849147 Root"
+
 > sudo openssl x509 -req -in root.csr -out root.crt -signkey root_private.key -days 365
 
 *Creating intermediate certificate signed by root CA*
 > sudo openssl genrsa -aes256 -out intermediate_private.key 4096
+
 > sudo openssl req -new -key intermediate_private.key -out intermediate.csr -subj "/C=VN/ST=JJ/L=GLB/O=USYD/CN=540849147 Intermediate"
+
 > sudo openssl x509 -req -in intermediate.csr -CA root.crt -CAkey root_private.key -CAcreateserial -out intermediate.crt -days 365
 
 *Creating end certificate signed by intermediate CA*
 > sudo openssl genrsa -aes256 -out end_private.key 4096
+
 > sudo openssl req -new -key end_private.key -out end.csr -subj "/C=VN/ST=JJ/L=GLB/O=USYD/CN=540849147 End"
 
 *Concatenating 3 certificates into one*
