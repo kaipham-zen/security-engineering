@@ -1,0 +1,1 @@
+Given a compiled C program named 'securevault', we'll conduct buffer overflow attacks using gdb and recover the secrets
