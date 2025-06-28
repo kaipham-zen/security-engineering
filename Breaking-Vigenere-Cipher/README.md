@@ -1,0 +1,11 @@
+Given a cipher text encrypted by the Vigenère cipher, the task is to break it and find the original plaintext.
+
+The solution will involve some guesswork and analysis involved, and will not give the correct decrypted result straight away. We'll need to run the code multiple times to check various substitutions and to see which substitutions results in a readable text. It also involves Kasiski test to guess the encryption key length.
+
+1. Kasiski test: We'll analyse the encrypted message to find the interval between repetitions of the repeatable strings. The greatest common divisor (GCD) of these intervals is likely to key length as it's the longest possible key.
+
+2. Running the code several times: Our main function will first read content of the ciphertext file which is the ciphertext that is required to decrypt. The index of non-alphabetical characters and the corresponding character will be stored in non_alpha list which will be added back once we finish our decryption with the key. Then, the program will perform frequency analysis and plot the charts by calling 2 functions analyse_frequency() and frequency_plot(). Different charts will be shown one by one, we will close the chart window to proceed further. With the frequency charts, we’ll conduct some analysis and guesswork which is presented later. 
+
+After charts are plotted, our program will keep prompt the message that asks to enter the key for decryption. The code will call vigenere() function to decrypt the ciphertext with the input key and show us the decrypted plaintext.
+
+3. Guesswork and message decryption: By comparing the frequency of each index list with the frequency of English language, we can guess estimate the shift of characters and their substitution. We know that the letters with highest frequency likely substitute to E, henceforth, we want to find the key that convert the most frequent character back to E. After analysing and trying the guessing keys into our program, we will first find partially readable messages (partially corrected key). After several tries and errors to guess the 'possibly correct' message and find the 'possibly corrected key characters', we'll eventually find the correct key: XVFDRTPESKINMZQA.
